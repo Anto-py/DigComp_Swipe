@@ -14,7 +14,6 @@ const btnRight = document.getElementById('btn-right');
 const nextBtn = document.getElementById('next-btn');
 const restartBtn = document.getElementById('restart-btn');
 
-const card = document.getElementById('card');
 const domainBadge = document.getElementById('domain-badge');
 const situationTitle = document.getElementById('situation-title');
 const situationText = document.getElementById('situation-text');
@@ -56,11 +55,23 @@ function loadSituation() {
     
     // Update card content
     domainBadge.textContent = situation.domain;
-    situationTitle.textContent = situation.title;
+    situationTitle.innerHTML = formatTitle(situation.title);
     situationText.textContent = `"${situation.situation}"`;
+}
+
+function formatTitle(title) {
+    // Split title intelligently for emphasis
+    const words = title.split(' ');
+    if (words.length <= 2) {
+        return title;
+    }
     
-    // Reset card animation
-    card.classList.remove('swipe-left', 'swipe-right');
+    // Last 2-3 words get highlighted
+    const splitPoint = Math.max(1, words.length - 2);
+    const firstPart = words.slice(0, splitPoint).join(' ');
+    const highlightPart = words.slice(splitPoint).join(' ');
+    
+    return `${firstPart}<br><span class="highlight">${highlightPart}</span>`;
 }
 
 function makeChoice(choice) {
@@ -75,13 +86,8 @@ function makeChoice(choice) {
         activatedCompetences.add(situation.digital.competence);
     }
     
-    // Animate card
-    card.classList.add(choice === 'analog' ? 'swipe-left' : 'swipe-right');
-    
-    // Show feedback after animation
-    setTimeout(() => {
-        showFeedback(choice);
-    }, 500);
+    // Show feedback immediately (no animation for simplicity)
+    showFeedback(choice);
 }
 
 function showFeedback(choice) {
@@ -91,10 +97,21 @@ function showFeedback(choice) {
     let html = '';
     
     if (choice === 'digital') {
+        // Choix numérique - compétence activée
+        const statusClass = (feedback.status === 'ACTIVÉE' || feedback.status === 'ACTIVÉES') ? '' : 'inactive';
+        const statusText = feedback.status === 'ACTIVÉES' ? 'COMPÉTENCES' : 'COMPÉTENCE';
+        const emoji = statusClass === '' ? '✅' : '⚠️';
+        
         html = `
-            <div class="competence-badge">${feedback.status === 'ACTIVÉE' || feedback.status === 'ACTIVÉES' ? '✅' : '⚠️'} COMPÉTENCE${feedback.status === 'ACTIVÉES' ? 'S' : ''} DigComp ${feedback.status}</div>
+            <div class="competence-badge ${statusClass}">
+                ${emoji} ${statusText} DigComp ${feedback.status}
+            </div>
             <h2>${feedback.competence}</h2>
             <p><em>(${situation.domain})</em></p>
+            
+            <div class="retro-separator small">
+                <span class="flourish">❧</span>
+            </div>
             
             <div class="domain-info">
                 <h3>📖 C'est quoi ce domaine ?</h3>
@@ -111,10 +128,20 @@ function showFeedback(choice) {
             <p>${feedback.argument}</p>
         `;
     } else {
+        // Choix analogique - compétence non activée
+        const statusText = feedback.status === 'NON ACTIVÉES' ? 'COMPÉTENCES' : 'COMPÉTENCE';
+        const auraitPu = feedback.status === 'NON ACTIVÉES' ? 'auraient pu être travaillées' : 'aurait pu être travaillée';
+        
         html = `
-            <div class="competence-badge inactive">${feedback.status === 'NON ACTIVÉE' || feedback.status === 'NON ACTIVÉES' ? '⚠️' : ''} COMPÉTENCE${feedback.status === 'NON ACTIVÉES' ? 'S' : ''} DigComp ${feedback.status}</div>
-            <h2>${feedback.competence} <em>(aurait pu être travaillée${feedback.status === 'NON ACTIVÉES' ? 's' : ''})</em></h2>
+            <div class="competence-badge inactive">
+                ⚠️ ${statusText} DigComp ${feedback.status}
+            </div>
+            <h2>${feedback.competence} <em>(${auraitPu})</em></h2>
             <p><em>(${situation.domain})</em></p>
+            
+            <div class="retro-separator small">
+                <span class="flourish">❧</span>
+            </div>
             
             <div class="domain-info">
                 <h3>📖 C'est quoi ce domaine ?</h3>
@@ -133,6 +160,9 @@ function showFeedback(choice) {
     
     gameScreen.classList.remove('active');
     feedbackScreen.classList.add('active');
+    
+    // Scroll to top
+    window.scrollTo(0, 0);
 }
 
 function nextSituation() {
@@ -142,6 +172,7 @@ function nextSituation() {
     if (currentIndex < situations.length) {
         gameScreen.classList.add('active');
         loadSituation();
+        window.scrollTo(0, 0);
     } else {
         showFinalScreen();
     }
@@ -158,15 +189,19 @@ function showFinalScreen() {
     if (activatedCompetences.size > 0) {
         let competencesHtml = '<h3>🎯 Compétences DigComp activées dans vos choix :</h3><ul>';
         activatedCompetences.forEach(comp => {
-            competencesHtml += `<li>${comp}</li>`;
+            competencesHtml += `<li>✓ ${comp}</li>`;
         });
         competencesHtml += '</ul>';
         competencesBox.innerHTML = competencesHtml;
     } else {
-        competencesBox.innerHTML = '<h3>💡 Aucune compétence DigComp n\'a été activée dans vos choix.</h3><p>Refaites l\'activité en choisissant les approches numériques pour découvrir comment le DigComp s\'applique en classe !</p>';
+        competencesBox.innerHTML = `
+            <h3>💡 Aucune compétence DigComp n'a été activée dans vos choix.</h3>
+            <p>Refaites l'activité en choisissant les approches numériques pour découvrir comment le DigComp s'applique en classe !</p>
+        `;
     }
     
     finalScreen.classList.add('active');
+    window.scrollTo(0, 0);
 }
 
 function restart() {
@@ -176,4 +211,6 @@ function restart() {
     
     finalScreen.classList.remove('active');
     welcomeScreen.classList.add('active');
+    window.scrollTo(0, 0);
 }
+
