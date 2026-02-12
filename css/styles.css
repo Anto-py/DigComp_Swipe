@@ -321,6 +321,8 @@ strong {
     box-shadow: 0 4px 12px rgba(13, 22, 23, 0.1);
     background: none;
     margin: 0 auto;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(18, 118, 118, 0.2);
 }
 
 .retro-btn-pill:hover {

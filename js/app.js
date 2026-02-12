@@ -152,7 +152,7 @@ function showFeedback(choice) {
             <p>${feedback.practice}</p>
             
             <h3>${feedback.timeLost ? '⏱️ Le temps perdu :' : '📉 Ce qui manque :'}</h3>
-            <p>${feedback.timeLost || feedback.timeLost}</p>
+            <p>${feedback.timeLost || ''}</p>
         `;
     }
     
