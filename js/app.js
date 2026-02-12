@@ -14,6 +14,7 @@ const btnRight = document.getElementById('btn-right');
 const nextBtn = document.getElementById('next-btn');
 const restartBtn = document.getElementById('restart-btn');
 
+const card = document.getElementById('card');
 const domainBadge = document.getElementById('domain-badge');
 const situationTitle = document.getElementById('situation-title');
 const situationText = document.getElementById('situation-text');
@@ -57,6 +58,9 @@ function loadSituation() {
     domainBadge.textContent = situation.domain;
     situationTitle.innerHTML = formatTitle(situation.title);
     situationText.textContent = `"${situation.situation}"`;
+
+    // Reset card animation
+    card.classList.remove('swipe-left', 'swipe-right');
 }
 
 function formatTitle(title) {
@@ -86,8 +90,13 @@ function makeChoice(choice) {
         activatedCompetences.add(situation.digital.competence);
     }
     
-    // Show feedback immediately (no animation for simplicity)
-    showFeedback(choice);
+    // Animate card swipe
+    card.classList.add(choice === 'analog' ? 'swipe-left' : 'swipe-right');
+
+    // Show feedback after animation
+    setTimeout(() => {
+        showFeedback(choice);
+    }, 500);
 }
 
 function showFeedback(choice) {
