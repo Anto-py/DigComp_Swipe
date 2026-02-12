@@ -418,6 +418,25 @@ strong {
     padding: 40px;
     margin-bottom: 40px;
     position: relative;
+    transition: transform 0.3s ease;
+}
+
+.situation-container.swipe-left {
+    animation: swipeLeft 0.5s ease-out;
+}
+
+.situation-container.swipe-right {
+    animation: swipeRight 0.5s ease-out;
+}
+
+@keyframes swipeLeft {
+    0% { transform: translateX(0) rotate(0); opacity: 1; }
+    100% { transform: translateX(-150%) rotate(-30deg); opacity: 0; }
+}
+
+@keyframes swipeRight {
+    0% { transform: translateX(0) rotate(0); opacity: 1; }
+    100% { transform: translateX(150%) rotate(30deg); opacity: 0; }
 }
 
 .situation-container::before {
