@@ -401,10 +401,6 @@ strong {
     font-size: 1.75rem;
 }
 
-.retro-btn-pill-icon.icon-flip {
-    transform: scaleX(-1);
-}
-
 /* ========================================
    ÉCRAN DE JEU
    ======================================== */
