@@ -704,31 +704,44 @@ strong {
     .page-frame {
         padding: 32px 24px;
     }
-    
+
     h1 {
         font-size: 2.5rem;
     }
-    
+
     h2 {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
     }
-    
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
     .choice-section {
         flex-direction: column;
     }
-    
+
     .choice-section .retro-btn-pill {
         max-width: 100%;
     }
-    
+
     .situation-container {
         padding: 24px;
     }
-    
+
     .stats {
         grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
-    
+
+    .stat-item {
+        padding: 16px 10px;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
     .summary-stats {
         grid-template-columns: 1fr;
     }
@@ -736,19 +749,57 @@ strong {
 
 @media (max-width: 480px) {
     .page-frame {
-        padding: 24px 16px;
+        padding: 24px 12px;
         border-width: 3px;
     }
-    
+
     h1 {
-        font-size: 2rem;
+        font-size: 1.75rem;
     }
-    
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    .intro-box {
+        padding: 20px 14px;
+    }
+
+    .intro-box::before {
+        top: 5px;
+        left: 5px;
+        right: 5px;
+        bottom: 5px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .stat-item {
+        padding: 12px 8px;
+        border-width: 2px;
+    }
+
+    .stat-number {
+        font-size: 1.75rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+    }
+
     .retro-btn-pill-text {
         padding: 14px 24px;
         font-size: 1rem;
     }
-    
+
     .retro-btn-pill-icon {
         width: 52px;
         font-size: 1.5rem;
