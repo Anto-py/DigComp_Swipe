@@ -15,6 +15,7 @@ const nextBtn = document.getElementById('next-btn');
 const restartBtn = document.getElementById('restart-btn');
 
 const card = document.getElementById('card');
+const feedbackCard = document.getElementById('feedback-card');
 const domainBadge = document.getElementById('domain-badge');
 const situationTitle = document.getElementById('situation-title');
 const situationText = document.getElementById('situation-text');
@@ -166,10 +167,14 @@ function showFeedback(choice) {
     }
     
     feedbackContent.innerHTML = html;
-    
+
+    // Animate feedback card entrance (mirror of situation card exit)
+    feedbackCard.classList.remove('swipe-in-from-left', 'swipe-in-from-right');
+    feedbackCard.classList.add(choice === 'analog' ? 'swipe-in-from-right' : 'swipe-in-from-left');
+
     gameScreen.classList.remove('active');
     feedbackScreen.classList.add('active');
-    
+
     // Scroll to top
     window.scrollTo(0, 0);
 }

@@ -80,6 +80,24 @@ body {
     100% { transform: translateX(150%) rotate(30deg); opacity: 0; }
 }
 
+.page-frame.swipe-in-from-right {
+    animation: swipeInFromRight 0.5s ease-out;
+}
+
+.page-frame.swipe-in-from-left {
+    animation: swipeInFromLeft 0.5s ease-out;
+}
+
+@keyframes swipeInFromRight {
+    0% { transform: translateX(150%) rotate(30deg); opacity: 0; }
+    100% { transform: translateX(0) rotate(0); opacity: 1; }
+}
+
+@keyframes swipeInFromLeft {
+    0% { transform: translateX(-150%) rotate(-30deg); opacity: 0; }
+    100% { transform: translateX(0) rotate(0); opacity: 1; }
+}
+
 .game-frame,
 .feedback-frame {
     min-height: calc(100vh - 48px);
