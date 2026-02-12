@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiSwipe - Révélateur de pratiques DigComp</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Écran d'accueil -->
+    <div id="welcome-screen" class="screen active">
+        <div class="container">
+            <h1>DigiSwipe</h1>
+            <p class="subtitle">Révélateur de pratiques DigComp</p>
+            
+            <div class="intro-box">
+                <h2>À propos du DigComp 3.0</h2>
+                <p>Le <strong>DigComp 3.0</strong> est le référentiel européen de compétences numériques pour les citoyens, publié en novembre 2025 par le Centre commun de recherche (JRC) de la Commission européenne.</p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">domaines</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">21</span>
+                        <span class="stat-label">compétences</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4</span>
+                        <span class="stat-label">niveaux</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">acquis</span>
+                    </div>
+                </div>
+                
+                <p class="goal"><strong>Objectif :</strong> Atteindre 80 % d'adultes européens dotés de compétences numériques de base d'ici 2030 (contre 56 % en 2023).</p>
+            </div>
+            
+            <div class="instructions">
+                <h3>Comment ça marche ?</h3>
+                <p>Vous allez découvrir <strong>10 situations concrètes de classe</strong>.</p>
+                <p>Pour chaque situation :</p>
+                <ul>
+                    <li>👈 Swipe <strong>gauche</strong> = approche analogique</li>
+                    <li>👉 Swipe <strong>droite</strong> = approche numérique</li>
+                </ul>
+                <p class="duration">⏱️ Durée : 10 minutes</p>
+            </div>
+            
+            <button id="start-btn" class="btn-primary">Commencer l'activité</button>
+        </div>
+    </div>
+
+    <!-- Écran de jeu -->
+    <div id="game-screen" class="screen">
+        <div class="progress-bar">
+            <div id="progress" class="progress-fill"></div>
+        </div>
+        <div class="progress-text">
+            <span id="current-situation">1</span> / <span id="total-situations">10</span>
+        </div>
+
+        <div class="card-container">
+            <div id="card" class="card">
+                <div class="card-header">
+                    <span id="domain-badge" class="domain-badge"></span>
+                </div>
+                <div class="card-content">
+                    <h2 id="situation-title"></h2>
+                    <p id="situation-text" class="situation-text"></p>
+                </div>
+                <div class="card-actions">
+                    <button id="btn-left" class="btn-swipe btn-left">
+                        <span class="icon">⬅️</span>
+                        <span class="label">Analogique</span>
+                    </button>
+                    <button id="btn-right" class="btn-swipe btn-right">
+                        <span class="icon">➡️</span>
+                        <span class="label">Numérique</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Écran de feedback -->
+    <div id="feedback-screen" class="screen">
+        <div class="container feedback-container">
+            <div id="feedback-content" class="feedback-content"></div>
+            <button id="next-btn" class="btn-primary">Situation suivante</button>
+        </div>
+    </div>
+
+    <!-- Écran final -->
+    <div id="final-screen" class="screen">
+        <div class="container">
+            <h1>🎉 Activité terminée !</h1>
+            
+            <div class="summary">
+                <h2>Votre parcours :</h2>
+                <div class="summary-stats">
+                    <div class="summary-stat">
+                        <span class="summary-number" id="digital-count">0</span>
+                        <span class="summary-label">choix numériques</span>
+                    </div>
+                    <div class="summary-stat">
+                        <span class="summary-number" id="analog-count">0</span>
+                        <span class="summary-label">choix analogiques</span>
+                    </div>
+                </div>
+                
+                <div id="competences-activated" class="competences-box"></div>
+            </div>
+            
+            <div class="final-message">
+                <h3>Les 5 domaines du DigComp 3.0</h3>
+                <ol class="domains-list">
+                    <li><strong>Recherche, évaluation et gestion de l'information</strong> - Naviguer, évaluer, gérer</li>
+                    <li><strong>Communication et collaboration</strong> - Interagir, partager, collaborer</li>
+                    <li><strong>Création de contenu</strong> - Produire, remixer, coder</li>
+                    <li><strong>Sécurité, bien-être et usage responsable</strong> - Protéger, équilibrer</li>
+                    <li><strong>Identification et résolution de problèmes</strong> - Diagnostiquer, innover</li>
+                </ol>
+            </div>
+            
+            <button id="restart-btn" class="btn-primary">Recommencer</button>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
