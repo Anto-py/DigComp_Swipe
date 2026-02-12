@@ -140,7 +140,6 @@ function showFeedback(choice) {
     } else {
         // Choix analogique - compétence non activée
         const statusText = feedback.status === 'NON ACTIVÉES' ? 'COMPÉTENCES' : 'COMPÉTENCE';
-        const auraitPu = feedback.status === 'NON ACTIVÉES' ? 'auraient pu être travaillées' : 'aurait pu être travaillée';
         
         html = `
             <div class="competence-badge inactive">
