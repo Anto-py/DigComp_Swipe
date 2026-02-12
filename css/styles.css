@@ -356,6 +356,8 @@ strong {
 .retro-btn-pill {
     display: inline-flex;
     align-items: stretch;
+    gap: 0;
+    padding: 0;
     border-radius: 50px;
     border: 3px solid var(--retro-teal);
     overflow: hidden;
