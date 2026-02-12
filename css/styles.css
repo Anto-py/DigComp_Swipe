@@ -1,15 +1,45 @@
+/* =============================================================================
+   RETRONUMÉRIQUE — Thème rétro-digital pour DigiSwipe
+   Inspiré des terminaux CRT, jeux 8-bit et esthétique cyberpunk
+   ============================================================================= */
+
 :root {
-    --primary: #2563eb;
-    --primary-dark: #1e40af;
-    --secondary: #10b981;
-    --danger: #ef4444;
-    --warning: #f59e0b;
-    --bg: #f8fafc;
-    --text: #1e293b;
-    --text-light: #64748b;
-    --card-bg: #ffffff;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    /* Palette neon */
+    --neon-green:  #00ff41;
+    --neon-cyan:   #00e5ff;
+    --neon-orange: #ff6b35;
+    --neon-purple: #bf00ff;
+    --neon-amber:  #ffaa00;
+    --neon-pink:   #ff0080;
+
+    /* Fonds sombres */
+    --bg-dark:  #050d0a;
+    --bg-card:  #0a1510;
+    --bg-panel: #0d1f16;
+
+    /* Texte */
+    --text-primary:   #00ff41;
+    --text-secondary: #7fff7f;
+    --text-dim:       #2f8f2f;
+
+    /* Lueurs */
+    --glow-green:  0 0 8px #00ff41, 0 0 18px #00ff41, 0 0 36px #00ff41;
+    --glow-cyan:   0 0 8px #00e5ff, 0 0 18px #00e5ff, 0 0 36px #00e5ff;
+    --glow-orange: 0 0 8px #ff6b35, 0 0 18px #ff6b35;
+    --glow-purple: 0 0 8px #bf00ff, 0 0 18px #bf00ff;
+
+    /* Compatibilité */
+    --primary:      #00ff41;
+    --primary-dark: #00cc33;
+    --secondary:    #00e5ff;
+    --danger:       #ff0040;
+    --warning:      #ffaa00;
+    --bg:           var(--bg-dark);
+    --text:         var(--text-primary);
+    --text-light:   var(--text-secondary);
+    --card-bg:      var(--bg-card);
+    --shadow:       0 0 15px rgba(0,255,65,.3);
+    --shadow-lg:    0 0 30px rgba(0,255,65,.5);
 }
 
 * {
@@ -18,18 +48,57 @@
     box-sizing: border-box;
 }
 
+/* ============================================================
+   CORPS — Fond CRT + Grille + Scanlines
+   ============================================================ */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: var(--text);
+    font-family: 'VT323', 'Courier New', monospace;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
     min-height: 100vh;
     line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
 }
 
+/* Grille de fond type terminal */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0,255,65,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,65,.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Scanlines CRT */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,.12) 2px,
+        rgba(0,0,0,.12) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ============================================================
+   ÉCRANS
+   ============================================================ */
 .screen {
     display: none;
     min-height: 100vh;
     padding: 2rem 1rem;
+    position: relative;
+    z-index: 2;
 }
 
 .screen.active {
@@ -45,35 +114,73 @@ body {
     margin: 0 auto;
 }
 
-/* Welcome Screen */
+/* ============================================================
+   ÉCRAN D'ACCUEIL
+   ============================================================ */
 #welcome-screen h1 {
-    font-size: 3.5rem;
-    color: white;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 2.2rem;
+    color: var(--neon-green);
     text-align: center;
     margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: var(--glow-green);
+    animation: flicker 4s infinite;
+    letter-spacing: 3px;
+}
+
+@keyframes flicker {
+    0%,18%,20%,22%,25%,53%,57%,100% {
+        text-shadow: var(--glow-green);
+        opacity: 1;
+    }
+    19%,21%,54%,56% {
+        text-shadow: none;
+        opacity: .8;
+    }
 }
 
 .subtitle {
     text-align: center;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.2rem;
+    color: var(--neon-cyan);
+    font-size: 1.5rem;
     margin-bottom: 2rem;
+    text-shadow: var(--glow-cyan);
+    letter-spacing: 2px;
 }
 
-.intro-box {
-    background: var(--card-bg);
-    border-radius: 16px;
+/* Boîtes avec bordures neon */
+.intro-box,
+.instructions {
+    background: var(--bg-panel);
+    border: 2px solid var(--neon-green);
     padding: 2rem;
     margin-bottom: 1.5rem;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 0 20px rgba(0,255,65,.15), inset 0 0 20px rgba(0,255,65,.04);
+    position: relative;
 }
 
-.intro-box h2 {
-    color: var(--primary);
+.intro-box h2,
+.instructions h3 {
+    color: var(--neon-cyan);
     margin-bottom: 1rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: .8rem;
+    text-shadow: var(--glow-cyan);
+    letter-spacing: 2px;
 }
 
+.intro-box p,
+.instructions p {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+}
+
+.intro-box strong,
+.instructions strong {
+    color: var(--neon-green);
+}
+
+/* Stats */
 .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -84,109 +191,122 @@ body {
 .stat-item {
     text-align: center;
     padding: 1rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 12px;
-    color: white;
+    background: var(--bg-card);
+    border: 1px solid var(--neon-green);
+    box-shadow: 0 0 10px rgba(0,255,65,.25), inset 0 0 10px rgba(0,255,65,.04);
+    color: var(--neon-green);
+    clip-path: polygon(10px 0%,calc(100% - 10px) 0%,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0% calc(100% - 10px),0% 10px);
 }
 
 .stat-number {
     display: block;
-    font-size: 2rem;
-    font-weight: bold;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.4rem;
+    text-shadow: var(--glow-green);
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%,100% { text-shadow: var(--glow-green); }
+    50%      { text-shadow: 0 0 4px #00ff41; }
 }
 
 .stat-label {
     display: block;
-    font-size: 0.875rem;
-    opacity: 0.9;
+    font-size: .9rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
 }
 
 .goal {
-    background: #fef3c7;
+    background: rgba(255,170,0,.08);
     padding: 1rem;
-    border-radius: 8px;
-    border-left: 4px solid var(--warning);
+    border-left: 4px solid var(--neon-amber);
     margin-top: 1rem;
+    color: var(--neon-amber);
+    font-size: 1.1rem;
 }
 
-.instructions {
-    background: var(--card-bg);
-    border-radius: 16px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: var(--shadow-lg);
-}
-
-.instructions h3 {
-    color: var(--primary);
-    margin-bottom: 1rem;
-}
-
+/* Instructions */
 .instructions ul {
     list-style: none;
     margin: 1rem 0;
 }
 
 .instructions li {
-    padding: 0.5rem 0;
-    font-size: 1.1rem;
+    padding: .5rem 0;
+    font-size: 1.3rem;
+    color: var(--text-secondary);
 }
 
 .duration {
     text-align: center;
     font-weight: bold;
-    color: var(--primary);
+    color: var(--neon-amber);
     margin-top: 1rem;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
+    text-shadow: var(--glow-orange);
 }
 
-/* Buttons */
+/* ============================================================
+   BOUTON PRINCIPAL
+   ============================================================ */
 .btn-primary {
-    background: var(--primary);
-    color: white;
-    border: none;
+    background: transparent;
+    color: var(--neon-green);
+    border: 2px solid var(--neon-green);
     padding: 1rem 2rem;
-    font-size: 1.125rem;
-    font-weight: 600;
-    border-radius: 12px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: .7rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow);
+    transition: all .2s;
+    box-shadow: 0 0 15px rgba(0,255,65,.35);
     display: block;
     margin: 0 auto;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    clip-path: polygon(10px 0%,calc(100% - 10px) 0%,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0% calc(100% - 10px),0% 10px);
 }
 
 .btn-primary:hover {
-    background: var(--primary-dark);
+    background: var(--neon-green);
+    color: var(--bg-dark);
+    box-shadow: var(--glow-green);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
 }
 
-/* Progress Bar */
+/* ============================================================
+   BARRE DE PROGRESSION
+   ============================================================ */
 .progress-bar {
     width: 100%;
     height: 8px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
+    background: rgba(0,255,65,.1);
+    border: 1px solid rgba(0,255,65,.3);
     overflow: hidden;
     margin-bottom: 1rem;
 }
 
 .progress-fill {
     height: 100%;
-    background: var(--secondary);
-    transition: width 0.3s ease;
+    background: var(--neon-green);
+    box-shadow: var(--glow-green);
+    transition: width .3s ease;
 }
 
 .progress-text {
     text-align: center;
-    color: white;
-    font-weight: 600;
+    color: var(--neon-cyan);
+    font-family: 'Press Start 2P', monospace;
+    font-size: .65rem;
     margin-bottom: 2rem;
-    font-size: 1.1rem;
+    text-shadow: var(--glow-cyan);
+    letter-spacing: 4px;
 }
 
-/* Card */
+/* ============================================================
+   CARTE DE JEU
+   ============================================================ */
 .card-container {
     display: flex;
     justify-content: center;
@@ -195,61 +315,80 @@ body {
 }
 
 .card {
-    background: var(--card-bg);
-    border-radius: 20px;
+    background: var(--bg-panel);
+    border: 2px solid var(--neon-cyan);
     padding: 2rem;
     max-width: 600px;
     width: 100%;
-    box-shadow: var(--shadow-lg);
-    transition: transform 0.3s ease;
+    box-shadow: 0 0 30px rgba(0,229,255,.25), inset 0 0 30px rgba(0,229,255,.04);
+    transition: transform .3s ease;
+    position: relative;
+    clip-path: polygon(18px 0%,calc(100% - 18px) 0%,100% 18px,100% calc(100% - 18px),calc(100% - 18px) 100%,18px 100%,0% calc(100% - 18px),0% 18px);
 }
 
-.card.swipe-left {
-    animation: swipeLeft 0.5s ease-out;
+/* Coins HUD */
+.card::before,
+.card::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--neon-cyan);
+    border-style: solid;
 }
+.card::before { top:8px; left:8px;   border-width: 2px 0 0 2px; }
+.card::after  { bottom:8px; right:8px; border-width: 0 2px 2px 0; }
 
-.card.swipe-right {
-    animation: swipeRight 0.5s ease-out;
-}
+.card.swipe-left  { animation: swipeLeft  .5s ease-out; }
+.card.swipe-right { animation: swipeRight .5s ease-out; }
 
 @keyframes swipeLeft {
-    0% { transform: translateX(0) rotate(0); opacity: 1; }
+    0%   { transform: translateX(0) rotate(0);      opacity: 1; }
     100% { transform: translateX(-150%) rotate(-30deg); opacity: 0; }
 }
-
 @keyframes swipeRight {
-    0% { transform: translateX(0) rotate(0); opacity: 1; }
+    0%   { transform: translateX(0) rotate(0);     opacity: 1; }
     100% { transform: translateX(150%) rotate(30deg); opacity: 0; }
 }
 
-.card-header {
-    margin-bottom: 1.5rem;
-}
+.card-header { margin-bottom: 1.5rem; }
 
 .domain-badge {
     display: inline-block;
-    padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border-radius: 20px;
-    font-size: 0.875rem;
-    font-weight: 600;
+    padding: .4rem .8rem;
+    background: transparent;
+    border: 1px solid var(--neon-purple);
+    color: var(--neon-purple);
+    font-family: 'Press Start 2P', monospace;
+    font-size: .5rem;
+    letter-spacing: 2px;
+    box-shadow: 0 0 10px rgba(191,0,255,.3);
+    text-transform: uppercase;
 }
 
 .card-content h2 {
-    color: var(--primary);
+    color: var(--neon-cyan);
     margin-bottom: 1rem;
-    font-size: 1.5rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: .8rem;
+    text-shadow: var(--glow-cyan);
+    line-height: 1.9;
+    letter-spacing: 1px;
 }
 
 .situation-text {
-    font-size: 1.125rem;
+    font-size: 1.3rem;
     line-height: 1.8;
-    color: var(--text);
-    font-style: italic;
+    color: var(--text-secondary);
     margin-bottom: 2rem;
+    border-left: 3px solid var(--neon-green);
+    padding-left: 1rem;
+    font-style: normal;
 }
 
+/* ============================================================
+   BOUTONS DE SWIPE
+   ============================================================ */
 .card-actions {
     display: flex;
     gap: 1rem;
@@ -259,107 +398,144 @@ body {
 .btn-swipe {
     flex: 1;
     padding: 1.25rem;
-    border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
+    border: 2px solid;
+    background: transparent;
+    font-family: 'Press Start 2P', monospace;
+    font-size: .58rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all .2s;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    box-shadow: var(--shadow);
+    gap: .5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    clip-path: polygon(10px 0%,calc(100% - 10px) 0%,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0% calc(100% - 10px),0% 10px);
 }
 
 .btn-left {
-    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    color: white;
+    border-color: var(--neon-orange);
+    color: var(--neon-orange);
+    box-shadow: 0 0 12px rgba(255,107,53,.3);
+}
+.btn-left:hover {
+    background: var(--neon-orange);
+    color: var(--bg-dark);
+    box-shadow: var(--glow-orange);
 }
 
 .btn-right {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: white;
+    border-color: var(--neon-green);
+    color: var(--neon-green);
+    box-shadow: 0 0 12px rgba(0,255,65,.3);
+}
+.btn-right:hover {
+    background: var(--neon-green);
+    color: var(--bg-dark);
+    box-shadow: var(--glow-green);
 }
 
-.btn-swipe:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-}
+.btn-swipe:hover { transform: translateY(-4px); }
+.btn-swipe .icon { font-size: 1.5rem; }
 
-.btn-swipe .icon {
-    font-size: 1.5rem;
-}
-
-/* Feedback Screen */
+/* ============================================================
+   ÉCRAN DE FEEDBACK
+   ============================================================ */
 .feedback-container {
-    background: var(--card-bg);
-    border-radius: 20px;
+    background: var(--bg-panel);
+    border: 2px solid var(--neon-cyan);
     padding: 2rem;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 0 30px rgba(0,229,255,.2);
     max-width: 900px;
 }
 
-.feedback-content {
-    margin-bottom: 2rem;
-}
+.feedback-content { margin-bottom: 2rem; }
 
 .feedback-content h2 {
-    color: var(--primary);
+    color: var(--neon-cyan);
     margin: 1.5rem 0 1rem;
-    font-size: 1.75rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: .8rem;
+    text-shadow: var(--glow-cyan);
+    line-height: 1.9;
 }
 
 .feedback-content h3 {
-    color: var(--text);
-    margin: 1.25rem 0 0.75rem;
-    font-size: 1.25rem;
+    color: var(--neon-green);
+    margin: 1.25rem 0 .75rem;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
 }
 
 .feedback-content p {
     margin-bottom: 1rem;
     line-height: 1.8;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
 }
 
-.feedback-content strong {
-    color: var(--primary);
-}
+.feedback-content strong { color: var(--neon-green); }
 
 .competence-badge {
     display: inline-block;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: white;
-    padding: 0.75rem 1.25rem;
-    border-radius: 12px;
+    background: transparent;
+    border: 2px solid var(--neon-green);
+    color: var(--neon-green);
+    padding: .75rem 1.25rem;
     margin: 1rem 0;
-    font-weight: 600;
-    font-size: 1.125rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: .65rem;
+    box-shadow: var(--glow-green);
+    text-shadow: var(--glow-green);
+    animation: pulse-glow 2s infinite;
 }
 
 .competence-badge.inactive {
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    border-color: var(--danger);
+    color: var(--danger);
+    box-shadow: 0 0 12px rgba(255,0,64,.4);
+    text-shadow: 0 0 8px rgba(255,0,64,.5);
+    animation: none;
 }
 
 .domain-info {
-    background: #f1f5f9;
+    background: rgba(0,255,65,.04);
     padding: 1.25rem;
-    border-radius: 12px;
+    border-left: 4px solid var(--neon-green);
+    border-top: 1px solid rgba(0,255,65,.2);
+    border-bottom: 1px solid rgba(0,255,65,.2);
     margin: 1rem 0;
-    border-left: 4px solid var(--primary);
 }
 
-/* Final Screen */
+/* ============================================================
+   ÉCRAN FINAL
+   ============================================================ */
+#final-screen h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.4rem;
+    color: var(--neon-green);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: var(--glow-green);
+    animation: flicker 4s infinite;
+    line-height: 1.9;
+}
+
 .summary {
-    background: var(--card-bg);
-    border-radius: 16px;
+    background: var(--bg-panel);
+    border: 2px solid var(--neon-green);
     padding: 2rem;
     margin-bottom: 2rem;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 0 20px rgba(0,255,65,.15);
 }
 
 .summary h2 {
-    color: var(--primary);
+    color: var(--neon-cyan);
     margin-bottom: 1.5rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: .75rem;
+    text-shadow: var(--glow-cyan);
+    letter-spacing: 2px;
 }
 
 .summary-stats {
@@ -372,33 +548,39 @@ body {
 .summary-stat {
     text-align: center;
     padding: 1.5rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 12px;
-    color: white;
+    background: var(--bg-card);
+    border: 1px solid var(--neon-green);
+    box-shadow: 0 0 12px rgba(0,255,65,.2);
+    clip-path: polygon(14px 0%,calc(100% - 14px) 0%,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0% calc(100% - 14px),0% 14px);
 }
 
 .summary-number {
     display: block;
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 2.5rem;
+    color: var(--neon-green);
+    text-shadow: var(--glow-green);
+    margin-bottom: .5rem;
+    animation: pulse-glow 2s infinite;
 }
 
 .summary-label {
     display: block;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
 }
 
 .competences-box {
-    background: #f1f5f9;
+    background: rgba(0,255,65,.04);
     padding: 1.5rem;
-    border-radius: 12px;
+    border: 1px solid rgba(0,255,65,.3);
     margin-top: 1.5rem;
 }
 
 .competences-box h3 {
-    color: var(--primary);
+    color: var(--neon-cyan);
     margin-bottom: 1rem;
+    font-size: 1.3rem;
 }
 
 .competences-box ul {
@@ -407,55 +589,73 @@ body {
 }
 
 .competences-box li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #e2e8f0;
+    padding: .5rem 0;
+    border-bottom: 1px solid rgba(0,255,65,.2);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
 }
 
-.competences-box li:last-child {
-    border-bottom: none;
+.competences-box li::before {
+    content: '> ';
+    color: var(--neon-green);
 }
+
+.competences-box li:last-child { border-bottom: none; }
 
 .final-message {
-    background: var(--card-bg);
-    border-radius: 16px;
+    background: var(--bg-panel);
+    border: 2px solid var(--neon-purple);
     padding: 2rem;
     margin-bottom: 2rem;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 0 20px rgba(191,0,255,.15);
 }
 
 .final-message h3 {
-    color: var(--primary);
+    color: var(--neon-purple);
     margin-bottom: 1rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: .7rem;
+    text-shadow: var(--glow-purple);
+    letter-spacing: 1px;
 }
 
 .domains-list {
-    padding-left: 1.5rem;
+    list-style: none;
+    counter-reset: domain-counter;
+    padding-left: 0;
 }
 
 .domains-list li {
-    padding: 0.75rem 0;
+    padding: .75rem 0;
     line-height: 1.6;
+    border-bottom: 1px solid rgba(191,0,255,.2);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    counter-increment: domain-counter;
 }
 
-/* Responsive */
+.domains-list li::before {
+    content: counter(domain-counter, decimal-leading-zero) ' ';
+    color: var(--neon-purple);
+    font-family: 'Press Start 2P', monospace;
+    font-size: .6rem;
+    margin-right: .5rem;
+    vertical-align: middle;
+}
+
+.domains-list li strong { color: var(--neon-green); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 @media (max-width: 768px) {
-    #welcome-screen h1 {
-        font-size: 2.5rem;
-    }
-    
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .card {
-        padding: 1.5rem;
-    }
-    
-    .card-actions {
-        flex-direction: column;
-    }
-    
-    .btn-swipe {
-        width: 100%;
-    }
+    #welcome-screen h1 { font-size: 1.4rem; }
+    #final-screen h1   { font-size: 1rem; }
+
+    .stats { grid-template-columns: repeat(2, 1fr); }
+
+    .card { padding: 1.5rem; }
+
+    .card-actions  { flex-direction: column; }
+    .btn-swipe     { width: 100%; }
 }
