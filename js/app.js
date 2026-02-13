@@ -1,6 +1,16 @@
 let currentIndex = 0;
 let choices = [];
 let activatedCompetences = new Set();
+let shuffledSituations = [];
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
 
 // Elements
 const welcomeScreen = document.getElementById('welcome-screen');
@@ -37,21 +47,22 @@ nextBtn.addEventListener('click', nextSituation);
 restartBtn.addEventListener('click', restart);
 
 function startGame() {
+    shuffledSituations = shuffleArray(situations);
     welcomeScreen.classList.remove('active');
     gameScreen.classList.add('active');
     loadSituation();
 }
 
 function loadSituation() {
-    if (currentIndex >= situations.length) {
+    if (currentIndex >= shuffledSituations.length) {
         showFinalScreen();
         return;
     }
 
-    const situation = situations[currentIndex];
-    
+    const situation = shuffledSituations[currentIndex];
+
     // Update progress
-    const progress = ((currentIndex + 1) / situations.length) * 100;
+    const progress = ((currentIndex + 1) / shuffledSituations.length) * 100;
     progressFill.style.width = `${progress}%`;
     currentSituationEl.textContent = currentIndex + 1;
     
@@ -80,7 +91,7 @@ function formatTitle(title) {
 }
 
 function makeChoice(choice) {
-    const situation = situations[currentIndex];
+    const situation = shuffledSituations[currentIndex];
     choices.push({
         situationId: situation.id,
         choice: choice
@@ -101,7 +112,7 @@ function makeChoice(choice) {
 }
 
 function showFeedback(choice) {
-    const situation = situations[currentIndex];
+    const situation = shuffledSituations[currentIndex];
     const feedback = choice === 'digital' ? situation.digital : situation.analog;
     
     let html = '';
@@ -183,7 +194,7 @@ function nextSituation() {
     currentIndex++;
     feedbackScreen.classList.remove('active');
     
-    if (currentIndex < situations.length) {
+    if (currentIndex < shuffledSituations.length) {
         gameScreen.classList.add('active');
         loadSituation();
         window.scrollTo(0, 0);
