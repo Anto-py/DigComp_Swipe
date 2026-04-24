@@ -1,228 +1,196 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigiSwipe - Révélateur de pratiques DigComp</title>
-    <link rel="stylesheet" href="css/styles.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DigiSwipe - Révélateur de pratiques DigComp</title>
+<link href="css/styles.css" rel="stylesheet"/>
 </head>
 <body>
-    <!-- Écran d'accueil -->
-    <div id="welcome-screen" class="screen active">
-        <div class="page-frame">
-            <!-- Motif de fond subtil -->
-            <div class="page-pattern"></div>
-            
-            <div class="container">
-                <div class="header-welcome">
-                    <h1>
+<!-- Écran d'accueil -->
+<div class="screen active" id="welcome-screen">
+<div class="page-frame">
+<!-- Motif de fond subtil -->
+<div class="page-pattern"></div>
+<div class="container">
+<div class="header-welcome">
+<h1>
                         Digi<span class="highlight">Swipe</span>
-                    </h1>
-                    <p class="subtitle">Révélateur de pratiques DigComp</p>
-                </div>
-                
-                <div class="retro-separator">
-                    <span class="flourish">✿</span>
-                </div>
-                
-                <div class="intro-box">
-                    <div class="box-header">
-                        <span class="box-icon">📚</span>
-                        <h2>À propos du DigComp 3.0</h2>
-                    </div>
-                    
-                    <p>Le <strong>DigComp 3.0</strong> est le référentiel européen de compétences numériques pour les citoyens, publié en novembre 2025 par le Centre commun de recherche (JRC) de la Commission européenne. Il comporte 5 grands domaines de compétences divisés en une multitude de compétences</p>
-                    
-                    <div class="stats">
-                        <div class="stat-item">
-                            <span class="stat-number">5</span>
-                            <span class="stat-label">domaines</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">21</span>
-                            <span class="stat-label">compétences</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">4</span>
-                            <span class="stat-label">niveaux</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">500+</span>
-                            <span class="stat-label">acquis</span>
-                        </div>
-                    </div>
-                    
-                    <div class="goal-box">
-                        <span class="goal-icon">🎯</span>
-                        <p><strong>Objectif :</strong> Atteindre 80 % d'adultes européens dotés de compétences numériques de base d'ici 2030 (contre 56 % en 2023). Y a du boulot!</p>
-                    </div>
-                </div>
-                
-                <div class="retro-separator">
-                    <span class="flourish">❀</span>
-                </div>
-                
-                <div class="instructions-box">
-                    <h3>Comment ça marche ?</h3>
-                    <p>Vous allez découvrir <strong>10 situations concrètes de classe</strong>.</p>
-                    <p>Pour chaque situation :</p>
-                    <ul>
-                        <li><span class="emoji">👈</span> Swipe <strong>gauche</strong> = approche analogique</li>
-                        <li><span class="emoji">👉</span> Swipe <strong>droite</strong> = approche numérique</li>
-                    </ul>
-                    <p class="duration"><span class="emoji">⏱️</span> Durée : 3:21 min</p>
-                </div>
-                
-                <div class="retro-separator">
-                    <span class="flourish">✿</span>
-                </div>
-                
-                <button id="start-btn" type="button" class="retro-btn-pill">
-                    <span class="retro-btn-pill-text">Commencer l'activité</span>
-                    <span class="retro-btn-pill-icon">➜</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Écran de jeu -->
-    <div id="game-screen" class="screen">
-        <div id="card" class="page-frame game-frame">
-            <div class="container">
-                <!-- Progression -->
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div id="progress" class="progress-fill"></div>
-                    </div>
-                    <div class="progress-text">
+</h1>
+<p class="subtitle">Révélateur de pratiques DigComp</p>
+</div>
+<div class="retro-separator">
+<span class="flourish">✿</span>
+</div>
+<div class="intro-box">
+<div class="box-header">
+<span class="box-icon">📚</span>
+<h2>À propos du DigComp 3.0</h2>
+</div>
+<p>Le <strong>DigComp 3.0</strong> est le référentiel européen de compétences numériques pour les citoyens, publié en novembre 2025 par le Centre commun de recherche (JRC) de la Commission européenne. Il comporte 5 grands domaines de compétences divisés en une multitude de compétences</p>
+<div class="stats">
+<div class="stat-item">
+<span class="stat-number">5</span>
+<span class="stat-label">domaines</span>
+</div>
+<div class="stat-item">
+<span class="stat-number">21</span>
+<span class="stat-label">compétences</span>
+</div>
+<div class="stat-item">
+<span class="stat-number">4</span>
+<span class="stat-label">niveaux</span>
+</div>
+<div class="stat-item">
+<span class="stat-number">500+</span>
+<span class="stat-label">acquis</span>
+</div>
+</div>
+<div class="goal-box">
+<span class="goal-icon">🎯</span>
+<p><strong>Objectif :</strong> Atteindre 80 % d'adultes européens dotés de compétences numériques de base d'ici 2030 (contre 56 % en 2023). Y a du boulot!</p>
+</div>
+</div>
+<div class="retro-separator">
+<span class="flourish">❀</span>
+</div>
+<div class="instructions-box">
+<h3>Comment ça marche ?</h3>
+<p>Vous allez découvrir <strong>10 situations concrètes de classe</strong>.</p>
+<p>Pour chaque situation :</p>
+<ul>
+<li><span class="emoji">👈</span> Swipe <strong>gauche</strong> = approche analogique</li>
+<li><span class="emoji">👉</span> Swipe <strong>droite</strong> = approche numérique</li>
+</ul>
+<p class="duration"><span class="emoji">⏱️</span> Durée : 3:21 min</p>
+</div>
+<div class="retro-separator">
+<span class="flourish">✿</span>
+</div>
+<button class="retro-btn-pill" id="start-btn" type="button">
+<span class="retro-btn-pill-text">Commencer l'activité</span>
+<span class="retro-btn-pill-icon">➜</span>
+</button>
+</div>
+<div class="ab-attribution" style="text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(128,128,128,0.25);font-size:0.8rem;opacity:0.65;">
+<a href="https://www.linkedin.com/in/antonin-bareau/" rel="noopener" style="font-weight:bold;color:inherit;text-decoration:none;" target="_blank">Antonin Bareau</a>
+   — 
+  <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener" style="color:inherit;text-decoration:none;" target="_blank">Licence CC BY-SA 4.0</a>
+</div></div>
+</div>
+<!-- Écran de jeu -->
+<div class="screen" id="game-screen">
+<div class="page-frame game-frame" id="card">
+<div class="container">
+<!-- Progression -->
+<div class="progress-container">
+<div class="progress-bar">
+<div class="progress-fill" id="progress"></div>
+</div>
+<div class="progress-text">
                         Situation <span id="current-situation">1</span> / <span id="total-situations">10</span>
-                    </div>
-                </div>
-                
-                <div class="retro-separator small">
-                    <span class="flourish">❧</span>
-                </div>
-                
-                <!-- Badge domaine -->
-                <div id="domain-badge" class="domain-badge"></div>
-                
-                <!-- Titre -->
-                <h1 id="situation-title" class="situation-title"></h1>
-                
-                <div class="retro-separator">
-                    <span class="flourish">✿</span>
-                </div>
-                
-                <!-- Carte situation -->
-                <div class="situation-container">
-                    <div class="quote-marks">❝</div>
-                    <p id="situation-text" class="situation-text"></p>
-                </div>
-                
-                <div class="retro-separator">
-                    <span class="flourish">❀</span>
-                </div>
-                
-                <!-- Boutons -->
-                <div class="choice-section">
-                    <button id="btn-left" type="button" class="retro-btn-pill">
-                        <span class="retro-btn-pill-icon">◀</span>
-                        <span class="retro-btn-pill-text">Analogique</span>
-                    </button>
-
-                    <button id="btn-right" type="button" class="retro-btn-pill">
-                        <span class="retro-btn-pill-text">Numérique</span>
-                        <span class="retro-btn-pill-icon">▶</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Écran de feedback -->
-    <div id="feedback-screen" class="screen">
-        <div id="feedback-card" class="page-frame feedback-frame">
-            <div class="container">
-                <div id="feedback-content" class="feedback-content"></div>
-                
-                <div class="retro-separator">
-                    <span class="flourish">✿</span>
-                </div>
-                
-                <button id="next-btn" type="button" class="retro-btn-pill">
-                    <span class="retro-btn-pill-text">Situation suivante</span>
-                    <span class="retro-btn-pill-icon">➜</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Écran final -->
-    <div id="final-screen" class="screen">
-        <div class="page-frame">
-            <div class="container">
-                <div class="header-final">
-                    <h1>
-                        <span class="emoji-large">🎉</span><br>
-                        Activité<br>
-                        <span class="highlight">terminée !</span>
-                    </h1>
-                </div>
-                
-                <div class="retro-separator">
-                    <span class="flourish">✿</span>
-                </div>
-                
-                <div class="summary-box">
-                    <h2>Votre parcours :</h2>
-                    <div class="summary-stats">
-                        <div class="summary-stat">
-                            <span class="summary-number" id="digital-count">0</span>
-                            <span class="summary-label">choix numériques</span>
-                        </div>
-                        <div class="summary-stat">
-                            <span class="summary-number" id="analog-count">0</span>
-                            <span class="summary-label">choix analogiques</span>
-                        </div>
-                    </div>
-                    
-                    <div id="competences-activated" class="competences-box"></div>
-                </div>
-                
-                <div class="retro-separator">
-                    <span class="flourish">❀</span>
-                </div>
-                
-                <div class="domains-box">
-                    <h3>Les 5 domaines du DigComp 3.0</h3>
-                    <ol class="domains-list">
-                        <li><strong>Recherche, évaluation et gestion de l'information</strong><br><span class="domain-desc">Naviguer, évaluer, gérer</span></li>
-                        <li><strong>Communication et collaboration</strong><br><span class="domain-desc">Interagir, partager, collaborer</span></li>
-                        <li><strong>Création de contenu</strong><br><span class="domain-desc">Produire, remixer, coder</span></li>
-                        <li><strong>Sécurité, bien-être et usage responsable</strong><br><span class="domain-desc">Protéger, équilibrer</span></li>
-                        <li><strong>Identification et résolution de problèmes</strong><br><span class="domain-desc">Diagnostiquer, innover</span></li>
-                    </ol>
-                </div>
-                
-                <div class="retro-separator">
-                    <span class="flourish">✿</span>
-                </div>
-                
-                <button id="restart-btn" type="button" class="retro-btn-pill">
-                    <span class="retro-btn-pill-text">Recommencer</span>
-                    <span class="retro-btn-pill-icon">↻</span>
-                </button>
-            </div>
-        </div>
-    <div class="ab-attribution" style="text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(128,128,128,0.25);font-size:0.8rem;opacity:0.65;">
-  <a href="https://www.linkedin.com/in/antonin-bareau/" target="_blank" rel="noopener" style="font-weight:bold;color:inherit;text-decoration:none;">Antonin Bareau</a>
-  &nbsp;&mdash;&nbsp;
-  <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Licence CC BY-SA 4.0</a>
 </div>
 </div>
-
-    <script src="js/data.js?v=2"></script>
-    <script src="js/app.js?v=2"></script>
-
+<div class="retro-separator small">
+<span class="flourish">❧</span>
+</div>
+<!-- Badge domaine -->
+<div class="domain-badge" id="domain-badge"></div>
+<!-- Titre -->
+<h1 class="situation-title" id="situation-title"></h1>
+<div class="retro-separator">
+<span class="flourish">✿</span>
+</div>
+<!-- Carte situation -->
+<div class="situation-container">
+<div class="quote-marks">❝</div>
+<p class="situation-text" id="situation-text"></p>
+</div>
+<div class="retro-separator">
+<span class="flourish">❀</span>
+</div>
+<!-- Boutons -->
+<div class="choice-section">
+<button class="retro-btn-pill" id="btn-left" type="button">
+<span class="retro-btn-pill-icon">◀</span>
+<span class="retro-btn-pill-text">Analogique</span>
+</button>
+<button class="retro-btn-pill" id="btn-right" type="button">
+<span class="retro-btn-pill-text">Numérique</span>
+<span class="retro-btn-pill-icon">▶</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Écran de feedback -->
+<div class="screen" id="feedback-screen">
+<div class="page-frame feedback-frame" id="feedback-card">
+<div class="container">
+<div class="feedback-content" id="feedback-content"></div>
+<div class="retro-separator">
+<span class="flourish">✿</span>
+</div>
+<button class="retro-btn-pill" id="next-btn" type="button">
+<span class="retro-btn-pill-text">Situation suivante</span>
+<span class="retro-btn-pill-icon">➜</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Écran final -->
+<div class="screen" id="final-screen">
+<div class="page-frame">
+<div class="container">
+<div class="header-final">
+<h1>
+<span class="emoji-large">🎉</span><br/>
+                        Activité<br/>
+<span class="highlight">terminée !</span>
+</h1>
+</div>
+<div class="retro-separator">
+<span class="flourish">✿</span>
+</div>
+<div class="summary-box">
+<h2>Votre parcours :</h2>
+<div class="summary-stats">
+<div class="summary-stat">
+<span class="summary-number" id="digital-count">0</span>
+<span class="summary-label">choix numériques</span>
+</div>
+<div class="summary-stat">
+<span class="summary-number" id="analog-count">0</span>
+<span class="summary-label">choix analogiques</span>
+</div>
+</div>
+<div class="competences-box" id="competences-activated"></div>
+</div>
+<div class="retro-separator">
+<span class="flourish">❀</span>
+</div>
+<div class="domains-box">
+<h3>Les 5 domaines du DigComp 3.0</h3>
+<ol class="domains-list">
+<li><strong>Recherche, évaluation et gestion de l'information</strong><br/><span class="domain-desc">Naviguer, évaluer, gérer</span></li>
+<li><strong>Communication et collaboration</strong><br/><span class="domain-desc">Interagir, partager, collaborer</span></li>
+<li><strong>Création de contenu</strong><br/><span class="domain-desc">Produire, remixer, coder</span></li>
+<li><strong>Sécurité, bien-être et usage responsable</strong><br/><span class="domain-desc">Protéger, équilibrer</span></li>
+<li><strong>Identification et résolution de problèmes</strong><br/><span class="domain-desc">Diagnostiquer, innover</span></li>
+</ol>
+</div>
+<div class="retro-separator">
+<span class="flourish">✿</span>
+</div>
+<button class="retro-btn-pill" id="restart-btn" type="button">
+<span class="retro-btn-pill-text">Recommencer</span>
+<span class="retro-btn-pill-icon">↻</span>
+</button>
+</div>
+</div>
+</div>
+<script src="js/data.js?v=2"></script>
+<script src="js/app.js?v=2"></script>
 </body>
 </html>
